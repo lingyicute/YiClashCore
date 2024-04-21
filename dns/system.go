@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/metacubex/mihomo/component/resolver"
-	"github.com/metacubex/mihomo/log"
+	"github.com/lingyicute/yiclashcore/component/resolver"
+	"github.com/lingyicute/yiclashcore/log"
 
 	D "github.com/miekg/dns"
 	"golang.org/x/exp/slices"
