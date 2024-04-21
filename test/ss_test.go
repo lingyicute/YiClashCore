@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMihomo_Shadowsocks(t *testing.T) {
+func TestYiClashCore_Shadowsocks(t *testing.T) {
 	for _, method := range []string{
 		"aes-128-ctr",
 		"aes-192-ctr",
@@ -30,7 +30,7 @@ func TestMihomo_Shadowsocks(t *testing.T) {
 		"xchacha20-ietf-poly1305",
 	} {
 		t.Run(method, func(t *testing.T) {
-			testMihomo_Shadowsocks(t, method, "FzcLbKs2dY9mhL")
+			testYiClashCore_Shadowsocks(t, method, "FzcLbKs2dY9mhL")
 		})
 	}
 	for _, method := range []string{
@@ -39,17 +39,17 @@ func TestMihomo_Shadowsocks(t *testing.T) {
 		"chacha20-ietf-poly1305",
 	} {
 		t.Run(method, func(t *testing.T) {
-			testMihomo_ShadowsocksRust(t, method, "FzcLbKs2dY9mhL")
+			testYiClashCore_ShadowsocksRust(t, method, "FzcLbKs2dY9mhL")
 		})
 	}
 }
 
-func TestMihomo_Shadowsocks2022(t *testing.T) {
+func TestYiClashCore_Shadowsocks2022(t *testing.T) {
 	for _, method := range []string{
 		"2022-blake3-aes-128-gcm",
 	} {
 		t.Run(method, func(t *testing.T) {
-			testMihomo_ShadowsocksRust(t, method, mkKey(16))
+			testYiClashCore_ShadowsocksRust(t, method, mkKey(16))
 		})
 	}
 	for _, method := range []string{
@@ -57,7 +57,7 @@ func TestMihomo_Shadowsocks2022(t *testing.T) {
 		"2022-blake3-chacha20-poly1305",
 	} {
 		t.Run(method, func(t *testing.T) {
-			testMihomo_ShadowsocksRust(t, method, mkKey(32))
+			testYiClashCore_ShadowsocksRust(t, method, mkKey(32))
 		})
 	}
 }
@@ -68,7 +68,7 @@ func mkKey(bits int) string {
 	return base64.StdEncoding.EncodeToString(k)
 }
 
-func testMihomo_Shadowsocks(t *testing.T, method string, password string) {
+func testYiClashCore_Shadowsocks(t *testing.T, method string, password string) {
 	cfg := &container.Config{
 		Image: ImageShadowsocks,
 		Env: []string{
@@ -102,7 +102,7 @@ func testMihomo_Shadowsocks(t *testing.T, method string, password string) {
 	testSuit(t, proxy)
 }
 
-func testMihomo_ShadowsocksRust(t *testing.T, method string, password string) {
+func testYiClashCore_ShadowsocksRust(t *testing.T, method string, password string) {
 	cfg := &container.Config{
 		Image:        ImageShadowsocksRust,
 		Entrypoint:   []string{"ssserver"},
@@ -134,7 +134,7 @@ func testMihomo_ShadowsocksRust(t *testing.T, method string, password string) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_ShadowsocksObfsHTTP(t *testing.T) {
+func TestYiClashCore_ShadowsocksObfsHTTP(t *testing.T) {
 	cfg := &container.Config{
 		Image: ImageShadowsocks,
 		Env: []string{
@@ -172,7 +172,7 @@ func TestMihomo_ShadowsocksObfsHTTP(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_ShadowsocksObfsTLS(t *testing.T) {
+func TestYiClashCore_ShadowsocksObfsTLS(t *testing.T) {
 	cfg := &container.Config{
 		Image: ImageShadowsocks,
 		Env: []string{
@@ -210,7 +210,7 @@ func TestMihomo_ShadowsocksObfsTLS(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_ShadowsocksV2RayPlugin(t *testing.T) {
+func TestYiClashCore_ShadowsocksV2RayPlugin(t *testing.T) {
 	cfg := &container.Config{
 		Image: ImageShadowsocks,
 		Env: []string{
@@ -280,7 +280,7 @@ func Benchmark_Shadowsocks(b *testing.B) {
 	benchmarkProxy(b, proxy)
 }
 
-func TestMihomo_ShadowsocksUoT(t *testing.T) {
+func TestYiClashCore_ShadowsocksUoT(t *testing.T) {
 	configPath := C.Path.Resolve("xray-shadowsocks.json")
 
 	cfg := &container.Config{

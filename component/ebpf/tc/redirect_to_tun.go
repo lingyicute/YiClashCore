@@ -115,7 +115,7 @@ func (e *EBpfTC) Start() error {
 	filter := &netlink.BpfFilter{
 		FilterAttrs:  filterAttrs,
 		Fd:           objs.bpfPrograms.TcTunFunc.FD(),
-		Name:         "mihomo-tc-" + e.ifName,
+		Name:         "yiclashcore-tc-" + e.ifName,
 		DirectAction: true,
 	}
 

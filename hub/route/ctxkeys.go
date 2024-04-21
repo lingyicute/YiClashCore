@@ -10,5 +10,5 @@ var (
 type contextKey string
 
 func (c contextKey) String() string {
-	return "mihomo context key " + string(c)
+	return "yiclashcore context key " + string(c)
 }

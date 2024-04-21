@@ -13,14 +13,14 @@ import (
 
 	"github.com/lingyicute/yiclashcore/adapter/outboundgroup"
 	"github.com/lingyicute/yiclashcore/common/structure"
-	mihomoHttp "github.com/lingyicute/yiclashcore/component/http"
+	yiclashcoreHttp "github.com/lingyicute/yiclashcore/component/http"
 	C "github.com/lingyicute/yiclashcore/constant"
 )
 
 func downloadForBytes(url string) ([]byte, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*90)
 	defer cancel()
-	resp, err := mihomoHttp.HttpRequest(ctx, url, http.MethodGet, http.Header{"User-Agent": {C.UA}}, nil)
+	resp, err := yiclashcoreHttp.HttpRequest(ctx, url, http.MethodGet, http.Header{"User-Agent": {C.UA}}, nil)
 	if err != nil {
 		return nil, err
 	}

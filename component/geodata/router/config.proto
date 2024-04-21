@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package mihomo.component.geodata.router;
-option csharp_namespace = "Mihomo.Component.Geodata.Router";
+package yiclashcore.component.geodata.router;
+option csharp_namespace = "YiClashCore.Component.Geodata.Router";
 option go_package = "github.com/lingyicute/yiclashcore/component/geodata/router";
-option java_package = "com.mihomo.component.geodata.router";
+option java_package = "com.yiclashcore.component.geodata.router";
 option java_multiple_files = true;
 
 // Domain for routing decision.

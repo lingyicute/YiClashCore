@@ -33,7 +33,7 @@ func WithSecret(secret string) Option {
 	}
 }
 
-// Parse call at the beginning of mihomo
+// Parse call at the beginning of yiclashcore
 func Parse(options ...Option) error {
 	cfg, err := executor.Parse()
 	if err != nil {

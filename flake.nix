@@ -1,5 +1,5 @@
 {
-  description = "Another Mihomo Kernel";
+  description = "Another YiClashCore Kernel";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
 
@@ -15,7 +15,7 @@
           };
         in
         rec {
-          packages.default = pkgs.mihomo-meta;
+          packages.default = pkgs.yiclashcore-meta;
         }
       ) //
     (
@@ -23,8 +23,8 @@
       {
         overlay = final: prev: {
 
-          mihomo-meta = final.buildGo119Module {
-            pname = "mihomo-meta";
+          yiclashcore-meta = final.buildGo119Module {
+            pname = "yiclashcore-meta";
             inherit version;
             src = ./.;
 
@@ -50,7 +50,7 @@
             doCheck = false;
 
             postInstall = ''
-              mv $out/bin/mihomo $out/bin/mihomo-meta
+              mv $out/bin/yiclashcore $out/bin/yiclashcore-meta
             '';
 
           };

@@ -12,7 +12,7 @@ import (
 	"github.com/lingyicute/yiclashcore/log"
 )
 
-// ConvertsV2Ray convert V2Ray subscribe proxies data to mihomo proxies config
+// ConvertsV2Ray convert V2Ray subscribe proxies data to yiclashcore proxies config
 func ConvertsV2Ray(buf []byte) ([]map[string]any, error) {
 	data := DecodeBase64(buf)
 

@@ -658,7 +658,7 @@ func benchmarkProxy(b *testing.B, proxy C.ProxyAdapter) {
 	})
 }
 
-func TestMihomo_Basic(t *testing.T) {
+func TestYiClashCore_Basic(t *testing.T) {
 	basic := `
 mixed-port: 10000
 log-level: silent

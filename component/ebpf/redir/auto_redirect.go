@@ -131,7 +131,7 @@ func (e *EBpfRedirect) Start() error {
 	filter := &netlink.BpfFilter{
 		FilterAttrs:  filterAttrs,
 		Fd:           objs.bpfPrograms.TcRedirIngressFunc.FD(),
-		Name:         "mihomo-redir-ingress-" + e.ifName,
+		Name:         "yiclashcore-redir-ingress-" + e.ifName,
 		DirectAction: true,
 	}
 
@@ -153,7 +153,7 @@ func (e *EBpfRedirect) Start() error {
 	filterEgress := &netlink.BpfFilter{
 		FilterAttrs:  filterAttrsEgress,
 		Fd:           objs.bpfPrograms.TcRedirEgressFunc.FD(),
-		Name:         "mihomo-redir-egress-" + e.ifName,
+		Name:         "yiclashcore-redir-egress-" + e.ifName,
 		DirectAction: true,
 	}
 

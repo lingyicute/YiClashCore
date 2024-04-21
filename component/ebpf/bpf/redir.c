@@ -173,7 +173,7 @@ static __always_inline bool is_lan_ip(__be32 addr) {
     return false;
 }
 
-SEC("tc_mihomo_auto_redir_ingress")
+SEC("tc_yiclashcore_auto_redir_ingress")
 int tc_redir_ingress_func(struct __sk_buff *skb) {
     void *data          = (void *)(long)skb->data;
     void *data_end      = (void *)(long)skb->data_end;
@@ -264,7 +264,7 @@ int tc_redir_ingress_func(struct __sk_buff *skb) {
     return TC_ACT_OK;
 }
 
-SEC("tc_mihomo_auto_redir_egress")
+SEC("tc_yiclashcore_auto_redir_egress")
 int tc_redir_egress_func(struct __sk_buff *skb) {
     void *data          = (void *)(long)skb->data;
     void *data_end      = (void *)(long)skb->data_end;
@@ -276,10 +276,10 @@ int tc_redir_egress_func(struct __sk_buff *skb) {
     if (eth->h_proto != bpf_htons(ETH_P_IP))
         return TC_ACT_OK;
 
-    __u32 key = 0, *redir_ip, *redir_port; // *mihomo_mark
+    __u32 key = 0, *redir_ip, *redir_port; // *yiclashcore_mark
 
-//    mihomo_mark = bpf_map_lookup_elem(&redir_params_map, &key);
-//    if (mihomo_mark && *mihomo_mark != 0 && *mihomo_mark == skb->mark)
+//    yiclashcore_mark = bpf_map_lookup_elem(&redir_params_map, &key);
+//    if (yiclashcore_mark && *yiclashcore_mark != 0 && *yiclashcore_mark == skb->mark)
 //        return TC_ACT_OK;
 
     struct iphdr *iph = (struct iphdr *)(eth + 1);

@@ -1,4 +1,4 @@
-module mihomo-test
+module yiclashcore-test
 
 go 1.20
 

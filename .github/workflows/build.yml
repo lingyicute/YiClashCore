@@ -160,12 +160,12 @@ jobs:
         echo $CGO_ENABLED
         go build -v -tags "with_gvisor" -trimpath -ldflags "${BUILDTAG} -X 'github.com/lingyicute/yiclashcore/constant.Version=${VERSION}' -X 'github.com/lingyicute/yiclashcore/constant.BuildTime=${BUILDTIME}' -w -s -buildid="
         if [ "${{matrix.jobs.goos}}" = "windows" ]; then
-          cp mihomo.exe mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}.exe
-          zip -r mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.zip mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}.exe
+          cp yiclashcore.exe yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}.exe
+          zip -r yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.zip yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}.exe
         else
-          cp mihomo mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}
-          gzip -c mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}} > mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.gz
-          rm mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}
+          cp yiclashcore yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}
+          gzip -c yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}} > yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.gz
+          rm yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}
         fi
 
     - name: Create DEB package
@@ -182,23 +182,23 @@ jobs:
           PackageVersion="$(echo "${PackageVersion}" | awk -F '.' '{$NF = $NF + 1; print}' OFS='.')-${VERSION}"
         fi
 
-        mkdir -p mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/DEBIAN
-        mkdir -p mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/usr/bin
-        mkdir -p mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/etc/mihomo
-        mkdir -p mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/etc/systemd/system/
-        mkdir -p mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/usr/share/licenses/mihomo
+        mkdir -p yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/DEBIAN
+        mkdir -p yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/usr/bin
+        mkdir -p yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/etc/yiclashcore
+        mkdir -p yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/etc/systemd/system/
+        mkdir -p yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/usr/share/licenses/yiclashcore
 
-        cp mihomo mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/usr/bin/mihomo
-        cp LICENSE mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/usr/share/licenses/mihomo/
-        cp .github/mihomo.service mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/etc/systemd/system/
+        cp yiclashcore yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/usr/bin/yiclashcore
+        cp LICENSE yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/usr/share/licenses/yiclashcore/
+        cp .github/yiclashcore.service yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/etc/systemd/system/
 
-        cat > mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/etc/mihomo/config.yaml <<EOF
+        cat > yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/etc/yiclashcore/config.yaml <<EOF
         mixed-port: 7890
         external-controller: 127.0.0.1:9090
         EOF
 
-        cat > mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/DEBIAN/control <<EOF
-        Package: mihomo
+        cat > yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}/DEBIAN/control <<EOF
+        Package: yiclashcore
         Version: ${PackageVersion}
         Section:
         Priority: extra
@@ -208,14 +208,14 @@ jobs:
         Description: The universal proxy platform.
         EOF
 
-        dpkg-deb -Z gzip --build mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}
+        dpkg-deb -Z gzip --build yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}
 
     - name: Convert DEB to RPM
       if: ${{ matrix.jobs.goos == 'linux' && !contains(matrix.jobs.goarch, 'mips') }}
       run: |
         sudo apt-get install -y alien
-        alien --to-rpm --scripts mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.deb
-        mv mihomo*.rpm mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.rpm
+        alien --to-rpm --scripts yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.deb
+        mv yiclashcore*.rpm yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.rpm
 
     # - name: Convert DEB to PKG
     #   if: ${{ matrix.jobs.goos == 'linux' && !contains(matrix.jobs.goarch, 'mips') && !contains(matrix.jobs.goarch, 'loong64') }}
@@ -226,9 +226,9 @@ jobs:
     #       curl -L https://github.com/helixarch/debtap/raw/master/debtap > /usr/bin/debtap
     #       chmod 755 /usr/bin/debtap
     #       debtap -u 
-    #       debtap -Q /mnt/mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.deb
+    #       debtap -Q /mnt/yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.deb
     #     "
-    #     mv mihomo*.pkg.tar.zst mihomo-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.pkg.tar.zst
+    #     mv yiclashcore*.pkg.tar.zst yiclashcore-${{matrix.jobs.goos}}-${{matrix.jobs.output}}-${VERSION}.pkg.tar.zst
 
     - name: Save version
       run: |
@@ -240,10 +240,10 @@ jobs:
       with:
         name: ${{ matrix.jobs.goos }}-${{ matrix.jobs.output }}
         path: |
-          mihomo*.gz
-          mihomo*.deb
-          mihomo*.rpm
-          mihomo*.zip
+          yiclashcore*.gz
+          yiclashcore*.deb
+          yiclashcore*.rpm
+          yiclashcore*.zip
           version.txt
 
   Upload-Prerelease:

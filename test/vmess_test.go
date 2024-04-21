@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMihomo_Vmess(t *testing.T) {
+func TestYiClashCore_Vmess(t *testing.T) {
 	configPath := C.Path.Resolve("vmess.json")
 
 	cfg := &container.Config{
@@ -44,7 +44,7 @@ func TestMihomo_Vmess(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_VmessAuthenticatedLength(t *testing.T) {
+func TestYiClashCore_VmessAuthenticatedLength(t *testing.T) {
 	configPath := C.Path.Resolve("vmess.json")
 
 	cfg := &container.Config{
@@ -78,7 +78,7 @@ func TestMihomo_VmessAuthenticatedLength(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_VmessPacketAddr(t *testing.T) {
+func TestYiClashCore_VmessPacketAddr(t *testing.T) {
 	configPath := C.Path.Resolve("vmess.json")
 
 	cfg := &container.Config{
@@ -112,7 +112,7 @@ func TestMihomo_VmessPacketAddr(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_VmessTLS(t *testing.T) {
+func TestYiClashCore_VmessTLS(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageVmess,
 		ExposedPorts: defaultExposedPorts,
@@ -149,7 +149,7 @@ func TestMihomo_VmessTLS(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_VmessHTTP2(t *testing.T) {
+func TestYiClashCore_VmessHTTP2(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageVmess,
 		ExposedPorts: defaultExposedPorts,
@@ -191,7 +191,7 @@ func TestMihomo_VmessHTTP2(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_VmessHTTP(t *testing.T) {
+func TestYiClashCore_VmessHTTP(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageVmess,
 		ExposedPorts: defaultExposedPorts,
@@ -241,7 +241,7 @@ func TestMihomo_VmessHTTP(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_VmessWebsocket(t *testing.T) {
+func TestYiClashCore_VmessWebsocket(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageVmess,
 		ExposedPorts: defaultExposedPorts,
@@ -274,7 +274,7 @@ func TestMihomo_VmessWebsocket(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_VmessWebsocketTLS(t *testing.T) {
+func TestYiClashCore_VmessWebsocketTLS(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageVmess,
 		ExposedPorts: defaultExposedPorts,
@@ -311,7 +311,7 @@ func TestMihomo_VmessWebsocketTLS(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_VmessGrpc(t *testing.T) {
+func TestYiClashCore_VmessGrpc(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageVmess,
 		ExposedPorts: defaultExposedPorts,
@@ -352,7 +352,7 @@ func TestMihomo_VmessGrpc(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_VmessWebsocket0RTT(t *testing.T) {
+func TestYiClashCore_VmessWebsocket0RTT(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageVmess,
 		ExposedPorts: defaultExposedPorts,
@@ -390,7 +390,7 @@ func TestMihomo_VmessWebsocket0RTT(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_VmessWebsocketXray0RTT(t *testing.T) {
+func TestYiClashCore_VmessWebsocketXray0RTT(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageXray,
 		ExposedPorts: defaultExposedPorts,

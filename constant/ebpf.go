@@ -7,10 +7,10 @@ import (
 )
 
 const (
-	BpfFSPath = "/sys/fs/bpf/mihomo"
+	BpfFSPath = "/sys/fs/bpf/yiclashcore"
 
 	TcpAutoRedirPort  = 't'<<8 | 'r'<<0
-	MihomoTrafficMark = 'c'<<24 | 'l'<<16 | 't'<<8 | 'm'<<0
+	YiClashCoreTrafficMark = 'c'<<24 | 'l'<<16 | 't'<<8 | 'm'<<0
 )
 
 type EBpf interface {

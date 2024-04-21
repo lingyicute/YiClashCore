@@ -1,4 +1,4 @@
-## Mihomo testing suit
+## YiClashCore testing suit
 
 ### Protocol testing suit
 
@@ -51,8 +51,8 @@ $ make test
 benchmark (Linux)
 
 > Cannot represent the throughput of the protocol on your machine
-> but you can compare the corresponding throughput of the protocol on mihomo
-> (change chunkSize to measure the maximum throughput of mihomo on your machine)
+> but you can compare the corresponding throughput of the protocol on yiclashcore
+> (change chunkSize to measure the maximum throughput of yiclashcore on your machine)
 
 ```
 $ make benchmark

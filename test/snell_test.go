@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMihomo_SnellObfsHTTP(t *testing.T) {
+func TestYiClashCore_SnellObfsHTTP(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageSnell,
 		ExposedPorts: defaultExposedPorts,
@@ -44,7 +44,7 @@ func TestMihomo_SnellObfsHTTP(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_SnellObfsTLS(t *testing.T) {
+func TestYiClashCore_SnellObfsTLS(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageSnell,
 		ExposedPorts: defaultExposedPorts,
@@ -77,7 +77,7 @@ func TestMihomo_SnellObfsTLS(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_Snell(t *testing.T) {
+func TestYiClashCore_Snell(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageSnell,
 		ExposedPorts: defaultExposedPorts,
@@ -107,7 +107,7 @@ func TestMihomo_Snell(t *testing.T) {
 	testSuit(t, proxy)
 }
 
-func TestMihomo_Snellv3(t *testing.T) {
+func TestYiClashCore_Snellv3(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageSnell,
 		ExposedPorts: defaultExposedPorts,

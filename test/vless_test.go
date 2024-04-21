@@ -12,7 +12,7 @@ import (
 )
 
 // TODO: fix udp test
-func TestMihomo_VlessTLS(t *testing.T) {
+func TestYiClashCore_VlessTLS(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageVmess,
 		ExposedPorts: defaultExposedPorts,
@@ -51,7 +51,7 @@ func TestMihomo_VlessTLS(t *testing.T) {
 }
 
 // TODO: fix udp test
-func TestMihomo_VlessXTLS(t *testing.T) {
+func TestYiClashCore_VlessXTLS(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageXray,
 		ExposedPorts: defaultExposedPorts,
@@ -91,7 +91,7 @@ func TestMihomo_VlessXTLS(t *testing.T) {
 }
 
 // TODO: fix udp test
-func TestMihomo_VlessWS(t *testing.T) {
+func TestYiClashCore_VlessWS(t *testing.T) {
 	cfg := &container.Config{
 		Image:        ImageVmess,
 		ExposedPorts: defaultExposedPorts,

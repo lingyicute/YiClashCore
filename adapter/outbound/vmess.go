@@ -21,7 +21,7 @@ import (
 	C "github.com/lingyicute/yiclashcore/constant"
 	"github.com/lingyicute/yiclashcore/ntp"
 	"github.com/lingyicute/yiclashcore/transport/gun"
-	mihomoVMess "github.com/lingyicute/yiclashcore/transport/vmess"
+	yiclashcoreVMess "github.com/lingyicute/yiclashcore/transport/vmess"
 
 	vmess "github.com/metacubex/sing-vmess"
 	"github.com/metacubex/sing-vmess/packetaddr"
@@ -106,7 +106,7 @@ func (v *Vmess) StreamConnContext(ctx context.Context, c net.Conn, metadata *C.M
 	switch v.option.Network {
 	case "ws":
 		host, port, _ := net.SplitHostPort(v.addr)
-		wsOpts := &mihomoVMess.WebsocketConfig{
+		wsOpts := &yiclashcoreVMess.WebsocketConfig{
 			Host:                     host,
 			Port:                     port,
 			Path:                     v.option.WSOpts.Path,
@@ -143,12 +143,12 @@ func (v *Vmess) StreamConnContext(ctx context.Context, c net.Conn, metadata *C.M
 				wsOpts.TLSConfig.ServerName = host
 			}
 		}
-		c, err = mihomoVMess.StreamWebsocketConn(ctx, c, wsOpts)
+		c, err = yiclashcoreVMess.StreamWebsocketConn(ctx, c, wsOpts)
 	case "http":
 		// readability first, so just copy default TLS logic
 		if v.option.TLS {
 			host, _, _ := net.SplitHostPort(v.addr)
-			tlsOpts := &mihomoVMess.TLSConfig{
+			tlsOpts := &yiclashcoreVMess.TLSConfig{
 				Host:              host,
 				SkipCertVerify:    v.option.SkipCertVerify,
 				ClientFingerprint: v.option.ClientFingerprint,
@@ -159,24 +159,24 @@ func (v *Vmess) StreamConnContext(ctx context.Context, c net.Conn, metadata *C.M
 			if v.option.ServerName != "" {
 				tlsOpts.Host = v.option.ServerName
 			}
-			c, err = mihomoVMess.StreamTLSConn(ctx, c, tlsOpts)
+			c, err = yiclashcoreVMess.StreamTLSConn(ctx, c, tlsOpts)
 			if err != nil {
 				return nil, err
 			}
 		}
 
 		host, _, _ := net.SplitHostPort(v.addr)
-		httpOpts := &mihomoVMess.HTTPConfig{
+		httpOpts := &yiclashcoreVMess.HTTPConfig{
 			Host:    host,
 			Method:  v.option.HTTPOpts.Method,
 			Path:    v.option.HTTPOpts.Path,
 			Headers: v.option.HTTPOpts.Headers,
 		}
 
-		c = mihomoVMess.StreamHTTPConn(c, httpOpts)
+		c = yiclashcoreVMess.StreamHTTPConn(c, httpOpts)
 	case "h2":
 		host, _, _ := net.SplitHostPort(v.addr)
-		tlsOpts := mihomoVMess.TLSConfig{
+		tlsOpts := yiclashcoreVMess.TLSConfig{
 			Host:              host,
 			SkipCertVerify:    v.option.SkipCertVerify,
 			NextProtos:        []string{"h2"},
@@ -188,24 +188,24 @@ func (v *Vmess) StreamConnContext(ctx context.Context, c net.Conn, metadata *C.M
 			tlsOpts.Host = v.option.ServerName
 		}
 
-		c, err = mihomoVMess.StreamTLSConn(ctx, c, &tlsOpts)
+		c, err = yiclashcoreVMess.StreamTLSConn(ctx, c, &tlsOpts)
 		if err != nil {
 			return nil, err
 		}
 
-		h2Opts := &mihomoVMess.H2Config{
+		h2Opts := &yiclashcoreVMess.H2Config{
 			Hosts: v.option.HTTP2Opts.Host,
 			Path:  v.option.HTTP2Opts.Path,
 		}
 
-		c, err = mihomoVMess.StreamH2Conn(c, h2Opts)
+		c, err = yiclashcoreVMess.StreamH2Conn(c, h2Opts)
 	case "grpc":
 		c, err = gun.StreamGunWithConn(c, v.gunTLSConfig, v.gunConfig, v.realityConfig)
 	default:
 		// handle TLS
 		if v.option.TLS {
 			host, _, _ := net.SplitHostPort(v.addr)
-			tlsOpts := &mihomoVMess.TLSConfig{
+			tlsOpts := &yiclashcoreVMess.TLSConfig{
 				Host:              host,
 				SkipCertVerify:    v.option.SkipCertVerify,
 				ClientFingerprint: v.option.ClientFingerprint,
@@ -217,7 +217,7 @@ func (v *Vmess) StreamConnContext(ctx context.Context, c net.Conn, metadata *C.M
 				tlsOpts.Host = v.option.ServerName
 			}
 
-			c, err = mihomoVMess.StreamTLSConn(ctx, c, tlsOpts)
+			c, err = yiclashcoreVMess.StreamTLSConn(ctx, c, tlsOpts)
 		}
 	}
 

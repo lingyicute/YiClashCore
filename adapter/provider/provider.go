@@ -13,7 +13,7 @@ import (
 	"github.com/lingyicute/yiclashcore/adapter"
 	"github.com/lingyicute/yiclashcore/common/convert"
 	"github.com/lingyicute/yiclashcore/common/utils"
-	mihomoHttp "github.com/lingyicute/yiclashcore/component/http"
+	yiclashcoreHttp "github.com/lingyicute/yiclashcore/component/http"
 	"github.com/lingyicute/yiclashcore/component/resource"
 	C "github.com/lingyicute/yiclashcore/constant"
 	types "github.com/lingyicute/yiclashcore/constant/provider"
@@ -124,7 +124,7 @@ func (pp *proxySetProvider) getSubscriptionInfo() {
 	go func() {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second*90)
 		defer cancel()
-		resp, err := mihomoHttp.HttpRequestWithProxy(ctx, pp.Vehicle().(*resource.HTTPVehicle).Url(),
+		resp, err := yiclashcoreHttp.HttpRequestWithProxy(ctx, pp.Vehicle().(*resource.HTTPVehicle).Url(),
 			http.MethodGet, http.Header{"User-Agent": {C.UA}}, nil, pp.Vehicle().Proxy())
 		if err != nil {
 			return
@@ -133,7 +133,7 @@ func (pp *proxySetProvider) getSubscriptionInfo() {
 
 		userInfoStr := strings.TrimSpace(resp.Header.Get("subscription-userinfo"))
 		if userInfoStr == "" {
-			resp2, err := mihomoHttp.HttpRequestWithProxy(ctx, pp.Vehicle().(*resource.HTTPVehicle).Url(),
+			resp2, err := yiclashcoreHttp.HttpRequestWithProxy(ctx, pp.Vehicle().(*resource.HTTPVehicle).Url(),
 				http.MethodGet, http.Header{"User-Agent": {"Quantumultx"}}, nil, pp.Vehicle().Proxy())
 			if err != nil {
 				return

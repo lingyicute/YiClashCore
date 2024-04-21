@@ -14,7 +14,7 @@ import (
 	LC "github.com/lingyicute/yiclashcore/listener/config"
 	"github.com/lingyicute/yiclashcore/listener/sing"
 	"github.com/lingyicute/yiclashcore/ntp"
-	mihomoVMess "github.com/lingyicute/yiclashcore/transport/vmess"
+	yiclashcoreVMess "github.com/lingyicute/yiclashcore/transport/vmess"
 
 	vmess "github.com/metacubex/sing-vmess"
 	"github.com/sagernet/sing/common"
@@ -85,7 +85,7 @@ func New(config LC.VmessServer, tunnel C.Tunnel, additions ...inbound.Addition) 
 	if config.WsPath != "" {
 		httpMux = http.NewServeMux()
 		httpMux.HandleFunc(config.WsPath, func(w http.ResponseWriter, r *http.Request) {
-			conn, err := mihomoVMess.StreamUpgradedWebsocketConn(w, r)
+			conn, err := yiclashcoreVMess.StreamUpgradedWebsocketConn(w, r)
 			if err != nil {
 				http.Error(w, err.Error(), 500)
 				return

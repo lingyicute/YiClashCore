@@ -173,7 +173,7 @@ type Experimental struct {
 	IP4PEnable       bool     `yaml:"dialer-ip4p-convert"`
 }
 
-// Config is mihomo config manager
+// Config is yiclashcore config manager
 type Config struct {
 	General       *General
 	IPTables      *IPTables

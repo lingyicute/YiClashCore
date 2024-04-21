@@ -32,7 +32,7 @@ func createCachefileStore(options Options) (*Pool, string, error) {
 	if err != nil {
 		return nil, "", err
 	}
-	f, err := os.CreateTemp("", "mihomo")
+	f, err := os.CreateTemp("", "yiclashcore")
 	if err != nil {
 		return nil, "", err
 	}

@@ -27,7 +27,7 @@ func HandleTcp(address string, proxy string) (conn net.Conn, err error) {
 	metadata.NetWork = C.TCP
 	metadata.Type = C.INNER
 	metadata.DNSMode = C.DNSNormal
-	metadata.Process = C.MihomoName
+	metadata.Process = C.YiClashCoreName
 	if proxy != "" {
 		metadata.SpecialProxy = proxy
 	}

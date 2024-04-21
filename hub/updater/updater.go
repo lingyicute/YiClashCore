@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	mihomoHttp "github.com/lingyicute/yiclashcore/component/http"
+	yiclashcoreHttp "github.com/lingyicute/yiclashcore/component/http"
 	"github.com/lingyicute/yiclashcore/constant"
 	C "github.com/lingyicute/yiclashcore/constant"
 	"github.com/lingyicute/yiclashcore/log"
@@ -24,7 +24,7 @@ import (
 )
 
 // modify from https://github.com/AdguardTeam/AdGuardHome/blob/595484e0b3fb4c457f9bb727a6b94faa78a66c5f/internal/updater/updater.go
-// Updater is the mihomo updater.
+// Updater is the yiclashcore updater.
 var (
 	goarm           string
 	gomips          string
@@ -42,7 +42,7 @@ var (
 	backupExeName  string // 备份文件名
 	updateExeName  string // 更新后的可执行文件
 
-	baseURL       string = "https://github.com/lingyicute/YiClashCore/releases/download/Prerelease-Alpha/mihomo"
+	baseURL       string = "https://github.com/lingyicute/YiClashCore/releases/download/Prerelease-Alpha/yiclashcore"
 	versionURL    string = "https://github.com/lingyicute/YiClashCore/releases/download/Prerelease-Alpha/version.txt"
 	packageURL    string
 	latestVersion string
@@ -136,11 +136,11 @@ func prepare(exePath string) (err error) {
 	backupDir = filepath.Join(workDir, "meta-backup")
 
 	if runtime.GOOS == "windows" {
-		updateExeName = "mihomo" + "-" + runtime.GOOS + "-" + runtime.GOARCH + amd64Compatible + ".exe"
+		updateExeName = "yiclashcore" + "-" + runtime.GOOS + "-" + runtime.GOARCH + amd64Compatible + ".exe"
 	} else if runtime.GOOS == "android" && runtime.GOARCH == "arm64" {
-		updateExeName = "mihomo-android-arm64-v8"
+		updateExeName = "yiclashcore-android-arm64-v8"
 	} else {
-		updateExeName = "mihomo" + "-" + runtime.GOOS + "-" + runtime.GOARCH + amd64Compatible
+		updateExeName = "yiclashcore" + "-" + runtime.GOOS + "-" + runtime.GOARCH + amd64Compatible
 	}
 
 	log.Infoln("updateExeName: %s ", updateExeName)
@@ -234,7 +234,7 @@ const MaxPackageFileSize = 32 * 1024 * 1024
 func downloadPackageFile() (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*90)
 	defer cancel()
-	resp, err := mihomoHttp.HttpRequest(ctx, packageURL, http.MethodGet, http.Header{"User-Agent": {C.UA}}, nil)
+	resp, err := yiclashcoreHttp.HttpRequest(ctx, packageURL, http.MethodGet, http.Header{"User-Agent": {C.UA}}, nil)
 	if err != nil {
 		return fmt.Errorf("http request failed: %w", err)
 	}
@@ -415,7 +415,7 @@ func copyFile(src, dst string) error {
 func getLatestVersion() (version string, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
-	resp, err := mihomoHttp.HttpRequest(ctx, versionURL, http.MethodGet, http.Header{"User-Agent": {C.UA}}, nil)
+	resp, err := yiclashcoreHttp.HttpRequest(ctx, versionURL, http.MethodGet, http.Header{"User-Agent": {C.UA}}, nil)
 	if err != nil {
 		return "", fmt.Errorf("get Latest Version fail: %w", err)
 	}
